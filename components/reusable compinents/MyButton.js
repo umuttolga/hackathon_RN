@@ -3,7 +3,7 @@ import { Button, Text, TouchableHighlight, View } from "react-native";
 
 const MyButton = ({ buttonStyle, textStyle, title, onPress }) => {
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableHighlight underlayColor={"none"} onPress={onPress}>
       <View className={buttonStyle}>
         <Text className={textStyle}>{title}</Text>
       </View>
