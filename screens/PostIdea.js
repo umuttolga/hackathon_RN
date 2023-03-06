@@ -5,6 +5,7 @@ import UserInput from "../components/reusable compinents/UserInput";
 import { useForm } from "react-hook-form";
 import MyButton from "../components/reusable compinents/MyButton";
 import DropDownPicker from "react-native-dropdown-picker";
+import axios from "axios";
 
 const PostIdea = () => {
   const { control, handleSubmit } = useForm();
@@ -18,10 +19,24 @@ const PostIdea = () => {
     { label: "Entertainment", value: "Entertainment" },
     { label: "Economy", value: "Economy" },
     { label: "Travel", value: "Travel" },
+    { label: "Other", value: "Other" },
   ]);
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post(
+        "https://brainstorm-e28c3-default-rtdb.firebaseio.com/ideas.json",
+        {
+          title: data.ideaTitle,
+          category: value,
+          description:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
     console.log(data);
-    console.log(value);
   };
   return (
     <View className="m-auto bg-[#1A849B] h-[100vh] w-screen items-center">

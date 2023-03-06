@@ -1,5 +1,6 @@
 from flask import request, jsonify, Flask, url_for, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 #pip install Flask-SQLAlchemy
 #pip install ruamel-yaml
@@ -7,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 #The __name__ argument is a special variable that Flask uses to determine the root path of the application.
 app = Flask(__name__)
+CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ideas.db'
 
 db = SQLAlchemy(app)
@@ -54,10 +56,10 @@ def home():
 @app.route('/submit_idea', methods=['POST'])
 def submit_idea():
     # retrieve the data from the POST request
-    data = request.json
+    data = request.json.get('data')
 
     # create a new idea with the data
-    idea = Idea(title=data['title'], category=data['category'], description=data['description'], likes=0, dislikes=0)
+    idea = Idea(title=data['title'], category=data['category'], description=data['description'])
 
     # add the idea to the database
     db.session.add(idea)
@@ -96,4 +98,4 @@ def idea_details():
 
  
 if __name__ == "__main__":
-    app.run(debug = True, host = "0.0.0.0", port = 8000)
+    app.run(debug = True, host = "0.0.0.0", port = 5000)

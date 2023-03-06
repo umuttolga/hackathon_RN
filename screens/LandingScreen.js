@@ -4,6 +4,7 @@ import MyButton from "../components/reusable compinents/MyButton";
 import logo from "../assets/logo.png";
 import newIdea from "../assets/newIdea.png";
 import arrow from "../assets/arrow.png";
+import axios from "axios";
 
 function IdeaProps(title, description, category, likes) {
   return (
@@ -27,10 +28,53 @@ function IdeaProps(title, description, category, likes) {
 }
 
 const LandingScreen = ({ navigation }) => {
-  const sampleIdea = IdeaProps("test", "description", "trending", 100);
-  const [ideas, setIdeas] = useState(sampleIdea);
-  const [category, setCategory] = useState("Trending");
-
+  const [ideas, setIdeas] = useState(null);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(
+          "https://brainstorm-e28c3-default-rtdb.firebaseio.com/ideas.json"
+        );
+        const arr = Object.keys(response.data).map((key) => ({
+          id: key,
+          ...response.data[key],
+        }));
+        setIdeas(arr);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getData();
+  }, [ideas]);
+  const items = ideas.map((item) => (
+    <View
+      className="flex-row justify-around bg-[#23B0CF] p-4 mt-2 w-[45vh]"
+      key={item.id}
+    >
+      <View className="bg-[#fff] w-[8vh] h-[8vh]">
+        <Text
+          className={`${
+            item.category.length > 12 ? "text-[10px]" : "text-[16px]"
+          } m-auto `}
+        >
+          {item.category}
+        </Text>
+      </View>
+      <View className="">
+        <Text className="mx-auto text-[24px] w-[20vh] text-center font-bold  bg-white">
+          {item.title}
+        </Text>
+        <Text className="mt-4 font-semibold mx-auto  p-2 bg-white">
+          {item.description.length > 200
+            ? "Click for details"
+            : item.description}
+        </Text>
+      </View>
+      <View>
+        <Text>Rate</Text>
+      </View>
+    </View>
+  ));
   // useEffect(() => {
   // 	const fetchIdeas = async () => {
   // 		const res = await this.props.api.getIdeas(category);
@@ -62,6 +106,7 @@ const LandingScreen = ({ navigation }) => {
           <Image className="my-14 mx-4" source={newIdea} />
         </TouchableHighlight>
       </View>
+      <View className="">{items}</View>
       {/* <View className="w-screen h-5/6 mt-1/6 bg-[#FFF3F3]">
         <View className="w-11/12 h-fit mt-8 mx-auto flex-row bg-[#5C95FF] rounded-xl ">
           <View className="w-1/5 h-3/4 mx-4 my-auto bg-[#FFA9A3] rounded-xl" />
@@ -77,8 +122,8 @@ const LandingScreen = ({ navigation }) => {
           </View>
         </View>
       </View> */}
-      <>{ideas}</>
-      <MyButton
+
+      {/* <MyButton
         onPress={() => {
           navigation.navigate("throwIdea");
         }}
@@ -93,7 +138,7 @@ const LandingScreen = ({ navigation }) => {
         buttonStyle="border-2 border-[#fff] ml-4 p-2 px-8 rounded-3xl mt-4"
         textStyle="text-[#fff]"
         title="Display Ideas"
-      />
+      /> */}
     </View>
   );
 };
