@@ -8,7 +8,6 @@ const UserInput = ({
   secureTextEntry,
   name,
   control,
-  multiline,
 }) => {
   const {
     watch,
@@ -25,8 +24,6 @@ const UserInput = ({
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
-            returnKeyType="done"
-            multiline={multiline}
             className={`${inputStyle} `}
             placeholder={placeholder}
             onBlur={onBlur}
