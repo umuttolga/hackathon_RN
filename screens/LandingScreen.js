@@ -5,6 +5,20 @@ import logo from "../assets/logo.png";
 import newIdea from "../assets/newIdea.png";
 import arrow from "../assets/arrow.png";
 
+export async function getIdeas()
+{
+
+    // const request = "GET";
+    const url = "http://127.0.0.1:5000/home";
+    // const request = {
+    //     "title": title,
+    //     "category": category,
+    //     "description": description,
+    // };
+
+    return await fetch(url);
+};
+
 function IdeaProps(title, description, category, likes) {
   return (
     <View className="w-screen h-5/6 mt-1/6 bg-[#FFF3F3]">
@@ -26,6 +40,8 @@ function IdeaProps(title, description, category, likes) {
 }
 
 const LandingScreen = () => {
+  const res = getIdeas();
+  console.log
   const sampleIdea = IdeaProps("test", "description", "trending", 100);
   const [ideas, setIdeas] = useState(sampleIdea);
   const [category, setCategory] = useState("Trending");
