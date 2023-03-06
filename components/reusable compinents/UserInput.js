@@ -1,17 +1,15 @@
 import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { TextInput, View } from "react-native";
-import Button from "./Button";
 
 const UserInput = ({
   inputStyle,
   placeholder,
   secureTextEntry,
-  control,
   name,
+  control,
 }) => {
   const {
-    control,
     watch,
     handleSubmit,
     formState: { errors },
