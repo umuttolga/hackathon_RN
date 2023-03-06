@@ -1,5 +1,5 @@
 POST /submit_idea HTTP/1.1
-Host: 127.0.0.1:8080
+Host: 127.0.0.1:5000
 Content-Type: application/json; charset=utf-8
 
 {
@@ -11,5 +11,5 @@ Content-Type: application/json; charset=utf-8
 ###
 
 GET /home HTTP/1.1
-Host: 127.0.0.1:8080
+Host: 127.0.0.1:5000
 Content-Type: application/json; charset=utf-8

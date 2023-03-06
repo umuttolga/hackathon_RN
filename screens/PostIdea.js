@@ -5,7 +5,7 @@ import UserInput from "../components/reusable compinents/UserInput";
 import { useForm } from "react-hook-form";
 import MyButton from "../components/reusable compinents/MyButton";
 const PostIdea = () => {
-  const {control, }
+  // const {control, }
   return (
     <ScrollView>
       <View className="m-auto bg-[#1A849B] h-[100vh] w-screen items-center">
