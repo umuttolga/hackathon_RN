@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import MyButton from "../components/reusable compinents/MyButton";
 import DropDownPicker from "react-native-dropdown-picker";
 
-const PostIdea = () => {
+const PostIdea = ({ navigation }) => {
   const { control, handleSubmit } = useForm();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -64,10 +64,13 @@ const PostIdea = () => {
         </View>
       </View>
       <MyButton
-        onPress={handleSubmit(onSubmit)}
+        // onPress={handleSubmit(onSubmit)}
         buttonStyle="bg-[#6578DC] mt-4 p-4 px-10 rounded-xl"
         textStyle="text-[16px] text-white font-bold"
         title="Submit"
+        onPress={() => {
+          navigation.navigate("home")
+        }}
       />
     </View>
   );

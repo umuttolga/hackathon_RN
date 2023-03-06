@@ -1,49 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Image, TouchableHighlight } from "react-native";
+import { Text, View, Image, TouchableHighlight, TouchableOpacity } from "react-native";
 import MyButton from "../components/reusable compinents/MyButton";
 import logo from "../assets/logo.png";
 import newIdea from "../assets/newIdea.png";
 import arrow from "../assets/arrow.png";
 
-export async function getIdeas()
-{
-
-    // const request = "GET";
-    const url = "http://127.0.0.1:5000/home";
-    // const request = {
-    //     "title": title,
-    //     "category": category,
-    //     "description": description,
-    // };
-
-    return await fetch(url);
-};
-
-function IdeaProps(title, description, category, likes) {
+function IdeaProps(titleIn, description, category, likes, navigation) {
+  // console.log("hi");
+  // console.log(getIdeas());
   return (
     <View className="w-screen h-5/6 mt-1/6 bg-[#FFF3F3]">
-      <View className="w-11/12 h-fit mt-8 mx-auto flex-row bg-[#5C95FF] rounded-xl ">
-        <View className="w-1/5 h-3/4 mx-4 my-auto bg-[#FFA9A3] rounded-xl" />
-        <View className="w-52 h-fit my-auto bg-[#0]">
-          <Text className="text-2xl text-[#FFF] my-auto mx-auto">{title}</Text>
-          <Text className="text-xl text-[#7E6C6C] my-auto mx-auto">
-            {description}
-          </Text>
+      <TouchableOpacity onPress={() => {
+        navigation.navigate("displayIdeas");}
+      }>
+        <View className="w-11/12 h-fit mt-8 mx-auto flex-row bg-[#5C95FF] rounded-xl ">
+          <View className="w-1/5 h-3/4 mx-4 my-auto bg-[#FFA9A3] rounded-xl" />
+          <View className="w-52 h-fit my-auto bg-[#0]">
+            <Text className="text-2xl text-[#FFF] my-auto mx-auto">{titleIn}</Text>
+            <Text className="text-xl text-[#7E6C6C] my-auto mx-auto">
+              {description}
+            </Text>
+          </View>
+          <View className="w-44 h-fit my-auto bg-[#0]">
+            <Image className="w-4 h-4 my-1 mx-4" source={arrow} />
+            <Text className="text-2xl text-[#00FF75] mx-1">{likes}</Text>
+            <Image className="w-4 h-4 mb-1 mx-4 rotate-180" source={arrow} />
+          </View>
         </View>
-        <View className="w-44 h-fit my-auto bg-[#0]">
-          <Image className="w-4 h-4 my-1 mx-4" source={arrow} />
-          <Text className="text-2xl text-[#00FF75] mx-3">{likes}</Text>
-          <Image className="w-4 h-4 mb-1 mx-4 rotate-180" source={arrow} />
-        </View>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const LandingScreen = ({ navigation }) => {
-  const sampleIdea = IdeaProps("test", "description", "trending", 100);
-  const [ideas, setIdeas] = useState(sampleIdea);
-  const [category, setCategory] = useState("Trending");
+  const sampleIdea = IdeaProps("test1", "description", "trending", 100, navigation);
+  // const [ideas, setIdeas] = useState(sampleIdea);
+  // const [category, setCategory] = useState("Trending");
 
   // useEffect(() => {
   // 	const fetchIdeas = async () => {
@@ -91,7 +83,7 @@ const LandingScreen = ({ navigation }) => {
           </View>
         </View>
       </View> */}
-      <>{ideas}</>
+      <>{sampleIdea}</>
       <MyButton
         onPress={() => {
           navigation.navigate("throwIdea");
