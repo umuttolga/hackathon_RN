@@ -11,7 +11,6 @@ const PostIdea = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
     { label: "Business", value: "Business" },
     { label: "Education", value: "Education" },
     { label: "Health", value: "Health" },
