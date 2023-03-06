@@ -64,23 +64,52 @@ const LandingScreen = () => {
           <View className="w-44 h-fit my-auto bg-[#0]">
             <Image className="w-4 h-4 my-1 mx-4" source={arrow}/>
             <Text className="text-2xl text-[#00FF75] mx-3">50</Text>
-            <Image className="w-4 h-4 mb-1 mx-4 rotate-180" source={arrow}/>
+      <View className="flex-row items-center">
+              <Image className="w-4 h-4 mb-1 mx-4 rotate-180" source={arrow}/>
           </View>
         </View>
       </View> */}
       <>{ideas}</>
       <MyButton
-        buttonStyle="border-2 w-[] border-[#fff] p-2 px-8 rounded-3xl mt-4"
-        textStyle="text-[#fff]"
-        title="Throw Some ideas"
-      />
-      <MyButton
-        buttonStyle="border-2 border-[#fff] p-2 px-8 rounded-3xl mt-4"
-        textStyle="text-[#fff]"
-        title="Display Ideas"
-      />      
-    </View>
+          onPress={() => {
+            navigation.navigate("throwIdea");
+          }}
+          buttonStyle="border-2  border-[#fff] p-2 px-8 rounded-3xl mt-4"
+          textStyle="text-[#fff]"
+          title="Throw Some ideas"
+        />
+        <MyButton
+          onPress={() => {
+            navigation.navigate("displayIdeas");
+          }}
+          buttonStyle="border-2 border-[#fff] ml-4 p-2 px-8 rounded-3xl mt-4"
+          textStyle="text-[#fff]"
+          title="Display Ideas"
+        />      
+      </View>
   );
 };
+
+// Hope code:
+{/* <Text className="text-3xl text-[#000] mt-12">Landing Screen</Text>
+      <View className="flex-row items-center">
+        <MyButton
+          onPress={() => {
+            navigation.navigate("throwIdea");
+          }}
+          buttonStyle="border-2  border-[#fff] p-2 px-8 rounded-3xl mt-4"
+          textStyle="text-[#fff]"
+          title="Throw Some ideas"
+        />
+        <MyButton
+          onPress={() => {
+            navigation.navigate("displayIdeas");
+          }}
+          buttonStyle="border-2 border-[#fff] ml-4 p-2 px-8 rounded-3xl mt-4"
+          textStyle="text-[#fff]"
+          title="Display Ideas"
+        />
+      </View>
+    </View> */}
 
 export default LandingScreen;
